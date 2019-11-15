@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nuaa.travel.mapper.IUserMapper">
+    <resultMap id="userMap" type="com.nuaa.travel.dto.UserDTO">
+        <result column="id" property="id"/>
+        <result column="password" property="password"/>
+        <result column="name" property="name"/>
+    </resultMap>
+
+    <select id="selectCount" parameterType="String" resultType="Integer">
+        select count(*) from user where name = #{name}
+    </select>
+
+    <select id="selectUser" resultMap="userMap" parameterType="String">
+        select * from user where name = #{name}
+    </select>
+
+    <insert id="addOneUser" parameterType="com.nuaa.travel.entity.UserDO">
+        insert into user (name,password)
+        values (#{name},#{password});
+    </insert>
+
+</mapper>
